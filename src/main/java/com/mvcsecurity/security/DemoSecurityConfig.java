@@ -14,7 +14,19 @@ public class DemoSecurityConfig {
     @Bean
     public JdbcUserDetailsManager userDetailsManager(DataSource dataSource) {
 
-        return new JdbcUserDetailsManager(dataSource);
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+
+        // Following piece of code can be use when we use custom table and not the table given by springboot
+//        // Define query to retrieve use by username
+//        jdbcUserDetailsManager.setUsersByUsernameQuery(
+//                "select user_name, password from users where user_id=?"
+//        );
+//        // Define query to retrieve  the authorities /roles username
+//        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
+//                "select user_name from authorities where user_id=?"
+//        );
+
+        return jdbcUserDetailsManager;
     }
 
     @Bean
